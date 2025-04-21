@@ -1,0 +1,23 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow users to read their own data
+    match /users/{userId} {
+      allow read: if request.auth != null && (request.auth.uid == userId || isAdmin());
+      allow write: if request.auth != null && (request.auth.uid == userId || isAdmin());
+    }
+    
+    // Allow users to read all coffees
+    match /coffees/{coffeeId} {
+      allow read: if true;
+      allow write: if request.auth != null && isAdmin();
+    }
+    
+    // Check if the current user is an admin
+    function isAdmin() {
+      return request.auth != null && 
+        exists(/databases/{database}/documents/users/$(request.auth.uid)) &&
+        get(/databases/{database}/documents/users/$(request.auth.uid)).data.isAdmin == true;
+    }
+  }
+} 
