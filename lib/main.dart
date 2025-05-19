@@ -16,16 +16,17 @@ void main() async {
   try {
     if (Firebase.apps.isEmpty) {
       await Firebase.initializeApp(
-        options: const FirebaseOptions(
-          apiKey: "AIzaSyBEFu4Aza8rXYzVpLiMUaVLEAunBDl_UIg",
-          authDomain: "letsbrewapp.firebaseapp.com",
-          projectId: "letsbrewapp",
-          storageBucket: "letsbrewapp.firebasestorage.app",
-          messagingSenderId: "387419706730",
-          appId: "1:387419706730:web:38f72ad9a678f1d3944113",
-          measurementId: "G-BP9SRQE75B",
-        ),
-      );
+  options: const FirebaseOptions(
+    apiKey: "YOUR_API_KEY",
+    authDomain: "your-app.firebaseapp.com",
+    projectId: "your-project-id",
+    storageBucket: "your-app.appspot.com",
+    messagingSenderId: "your-sender-id",
+    appId: "your-app-id",
+    measurementId: "G-measurement-id",
+  ),
+);
+
       print('Firebase initialized successfully');
     }
   } catch (e) {
